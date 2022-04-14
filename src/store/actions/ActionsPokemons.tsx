@@ -13,11 +13,10 @@ export async function getInPokemons(dispatch:any) {
         console.log(error);   
     }
 }
+
 export async function getInPokemonEspecifico(dispatch:any , url:string ,navigate:any) {
-    // console.log(url.substr(26))
     try{
         const {data} = await apiPokedex.get(`/${url.substr(26)}`)
-        console.log(data)
         const setArrayDetalhes = {
             type:'SET_POKEMON',
             pokemon:data.results
@@ -46,4 +45,18 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
         getInPokemons(dispatch)
     }
     
+}
+export async function newGetPokemon(dispatch:any , id: string) {
+    try{
+        const {data} = await apiPokedex.get(`/pokemon/${id}`)
+        console.log(data)
+        const setArrayDetalhes = {
+            type:'SET_POKEMON',
+            pokemon:data
+        }
+        dispatch(setArrayDetalhes);
+    }
+    catch(error){
+        console.log(error);   
+    }
 }

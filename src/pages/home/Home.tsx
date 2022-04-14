@@ -5,7 +5,7 @@ import { getSearchByInput } from "../../store/actions/ActionsPokemons"
 import { getInPokemonEspecifico } from "../../store/actions/ActionsPokemons"
 import { connect } from "react-redux"
 
-function Home({pokemons , dispatch ,pokemon}:any) {
+function Home({pokemons , dispatch}:any) {
 const navigate = useNavigate()  
 useEffect(()=>{
   getInPokemons(dispatch) 
@@ -21,7 +21,7 @@ useEffect(()=>{
 
         {console.log(pokemons)}
         {pokemons.map((pokemon:any , indice:any ) =>(
-          <div key={indice} onClick={()=>getInPokemonEspecifico(dispatch , pokemon.url , navigate)}>
+          <div key={indice} onClick={() => getInPokemonEspecifico(dispatch , pokemon.url, navigate)}>
             <p>{pokemon.name}</p>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />
           </div>
@@ -31,6 +31,5 @@ useEffect(()=>{
 }
 const mapStateToProps = (state:any) => ({
   pokemons:state.pokeReducer.listPokemon,
-  pokemon:state.pokeReducer.pokemon
 })
 export default connect(mapStateToProps)(Home)
