@@ -29,3 +29,21 @@ export async function getInPokemonEspecifico(dispatch:any , url:string ,navigate
         console.log(error);   
     }
 }
+
+export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:string) {
+   const pokemonsByInput = pokemons.filter((pokemon:any) => 
+        pokemon.name === nomeInput
+    )
+    const setArray = {
+        type:'SET_LIST',
+        listPokemon:pokemonsByInput
+    }
+    if(pokemonsByInput.length != 0){
+        dispatch(setArray)
+    }else
+    {
+        alert('Nenhum pokemon encontrado')
+        getInPokemons(dispatch)
+    }
+    
+}
