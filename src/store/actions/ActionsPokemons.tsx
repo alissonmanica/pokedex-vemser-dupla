@@ -14,21 +14,6 @@ export async function getInPokemons(dispatch:any) {
     }
 }
 
-export async function getInPokemonEspecifico(dispatch:any , url:string ,navigate:any) {
-    try{
-        const {data} = await apiPokedex.get(`/${url.substr(26)}`)
-        const setArrayDetalhes = {
-            type:'SET_POKEMON',
-            pokemon:data.results
-        }
-        dispatch(setArrayDetalhes);
-        navigate(`detail/${url.split('/')[6]}`)
-    }
-    catch(error){
-        console.log(error);   
-    }
-}
-
 export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:string) {
    const pokemonsByInput = pokemons.filter((pokemon:any) => 
         pokemon.name === nomeInput

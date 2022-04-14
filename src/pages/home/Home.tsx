@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { getInPokemons } from "../../store/actions/ActionsPokemons"
 import { getSearchByInput } from "../../store/actions/ActionsPokemons"
-import { getInPokemonEspecifico } from "../../store/actions/ActionsPokemons"
 import { connect } from "react-redux"
 
 function Home({pokemons , dispatch}:any) {
@@ -21,7 +20,7 @@ useEffect(()=>{
 
         {console.log(pokemons)}
         {pokemons.map((pokemon:any , indice:any ) =>(
-          <div key={indice} onClick={() => getInPokemonEspecifico(dispatch , pokemon.url, navigate)}>
+          <div key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`) }>
             <p>{pokemon.name}</p>
             <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />
           </div>
