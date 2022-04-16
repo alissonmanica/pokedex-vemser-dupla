@@ -1,7 +1,8 @@
 
 const INITIAL_VALUES = {
   listPokemon: [],
-  pokemon: {}
+  pokemon: {},
+  token: true
 }
 
 function pokeReducer(state = INITIAL_VALUES, action: any) {
@@ -15,7 +16,8 @@ function pokeReducer(state = INITIAL_VALUES, action: any) {
   if (action.type === 'SET_POKEMON') {
     return {
       ...state,
-      pokemon: action.pokemon
+      pokemon: action.pokemon,
+      token: action.token
     }
   }
   return state

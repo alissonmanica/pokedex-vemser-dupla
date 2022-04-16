@@ -15,24 +15,29 @@ InputDefault,
 DivHeader,
 
 } from "./Home.styles"
+import apiPokedex from "../../apiPokedex"
 
 function Home({pokemons , dispatch}:any) {
 const navigate = useNavigate()  
+const [nomeInput ,setNomeInput] = useState('')
+
+
 useEffect(()=>{
   getInPokemons(dispatch) 
 },[])
-  const [nomeInput ,setNomeInput] = useState('')
+
   if(pokemons.length === 0){
     return(<h1>Loading</h1>)
   }
+
   return (
     <DivMaior>
       <DivHeader>
-        <H1><span><img src={pokeBall} alt="" /></span> Pokedex</H1>
+        <H1><span><img src={pokeBall} alt="pokeball" /></span> Pokedex</H1>
         <InputDefault type="text" placeholder='Procurar'onChange={(e)=>{setNomeInput(e.target.value)}} onBlur={()=>{getSearchByInput(dispatch ,pokemons , nomeInput)} }/>
       </DivHeader>
         <DivGrid >
-        {pokemons.map((pokemon:any , indice:any ) =>(
+        {pokemons.map((pokemon:any , indice:any ) => (
           <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`) }>
               <PdivDoPokemon>{firstLetterUpper(pokemon.name)}</PdivDoPokemon>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />

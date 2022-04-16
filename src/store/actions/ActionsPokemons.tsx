@@ -22,7 +22,7 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
         type:'SET_LIST',
         listPokemon:pokemonsByInput
     }
-    if(pokemonsByInput.length != 0){
+    if(pokemonsByInput.length !== 0){
         dispatch(setArray)
     }else
     {
@@ -31,13 +31,14 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
     }
     
 }
-export async function newGetPokemon(dispatch:any , id: string) {
+export async function newGetPokemon(dispatch:any , idPokemon: string) {
     try{
-        const {data} = await apiPokedex.get(`/pokemon/${id}`)
+        const {data} = await apiPokedex.get(`/pokemon/${idPokemon}`)
         console.log(data)
         const setArrayDetalhes = {
-            type:'SET_POKEMON',
-            pokemon:data
+            type: 'SET_POKEMON',
+            pokemon: data,
+            token: false
         }
         dispatch(setArrayDetalhes);
     }
@@ -45,3 +46,21 @@ export async function newGetPokemon(dispatch:any , id: string) {
         console.log(error);   
     }
 }
+
+// async function getAllPoke(dispatch: any, id: string, pokemon: any) {
+
+//     try {
+//         const {data} = await apiPokedex.get(`/pokemon-species/${id}`)
+//         const allPoke = {
+//             type: 'SET_ALL',
+//             pokemons: data
+//         }
+//         dispatch(allPoke);
+//     } catch (error) {
+//         console.log(error)
+//     }
+// }
+
+// export function executeGetAll() {
+    
+// }

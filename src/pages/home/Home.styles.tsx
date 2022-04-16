@@ -35,8 +35,10 @@ export const DivGrid = styled.div`
  justify-content: center;
 
 `
-export const DivDoPokemon = styled.div`
- background-color: white;
+export const DivDoPokemon = styled.div<{
+  corFundo?: any
+}>`
+ background-color: ${props => props.corFundo};
  border: 1px solid #E0E0E0;
  border-radius: 10px;
  width: 260px;

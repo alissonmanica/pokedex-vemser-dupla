@@ -9,7 +9,7 @@ function Routers() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/detail' element={<Details />}>
-          <Route path=':id' element={<Details />} />
+          <Route path=':idPokemon' element={<Details />} />
         </Route>
       </Routes>
     </BrowserRouter>
