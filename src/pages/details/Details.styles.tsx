@@ -96,6 +96,7 @@ export const DivFlex = styled.div<{
   color?: string,
   padding?: string,
 }>`
+  
   display: ${props => props.display};
   justify-content: ${props => props.juscont};
   align-items: ${props => props.alitems};

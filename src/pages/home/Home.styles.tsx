@@ -35,6 +35,21 @@ export const DivGrid = styled.div`
  justify-content: center;
 
 `
+export const SelectDefault = styled.select`
+  margin: 5px 0;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #E0E0E0; 
+`
+export const Option = styled.option`
+  padding: 6px 10px;
+`
+export const SpanDefault = styled.span`
+  font-size: 10px;
+  
+`
+
 export const DivDoPokemon = styled.div<{
   corFundo?: any
 }>`
@@ -52,6 +67,7 @@ export const DivDoPokemon = styled.div<{
     transition: 1s;
 }
 `
+
 
 export const PdivDoPokemon = styled.p`
   margin-bottom: 5px;

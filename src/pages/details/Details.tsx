@@ -1,7 +1,9 @@
 import { useEffect} from "react"
 import { connect } from "react-redux"
 import { useParams } from "react-router-dom"
+import { firstLetterUpper } from "../../Utils"
 import { newGetPokemon } from "../../store/actions/ActionsPokemons"
+import Loading from "../../components/loading/Loading"
 import {
   DivFlex,
   SpanType,
@@ -16,10 +18,6 @@ function Details({pokemon, token, dispatch}: any) {
 const {idPokemon}: any = useParams()
 const {id, abilities, name, weight, height, types, stats, sprites} = pokemon
 
-  function firstUpperString(props: string) {
-    return props.charAt(0).toUpperCase() + props.slice(1);
-};
-
   useEffect(() => {
     if(pokemon) {
       newGetPokemon(dispatch, idPokemon)
@@ -27,22 +25,22 @@ const {id, abilities, name, weight, height, types, stats, sprites} = pokemon
   },[])
 
   if (token) {
-    return (<h1>Loading...</h1>)
+    return (<Loading />)
   }
 
   return (
     <DetailsContainer>
       <ColorTypes color={types[0].type.name} width="500px" bradius="12px" margin="10px">
         <DivFlex display="flex" juscont="space-between" alitems="center" color="white" padding="0px 40px">
-          <h1>{firstUpperString(name)}</h1>
-          <p>#{id}</p>
+          <h1>{firstLetterUpper(name)}</h1>
+          <p>#{id <= 99 ? '0' + id : pokemon.url.split('/')[6] }</p>
         </DivFlex>
         <img src={sprites.front_default} alt="sprite-pokemon" />
         <AboutContainer>
           <div>         
             <DivFlex display="flex" juscont="center" gap="20px" >{types.map((item: any, index: number) => (  
                 <ColorTypes color={types[index].type.name} width="60px" bradius="30px" padding="6px 10px" talign="center" key={index}>
-                  <SpanType>{firstUpperString(item.type.name)}</SpanType>
+                  <SpanType>{firstLetterUpper(item.type.name)}</SpanType>
                 </ColorTypes>
               ))}
             </DivFlex>
@@ -54,7 +52,7 @@ const {id, abilities, name, weight, height, types, stats, sprites} = pokemon
               <DivFlex><ParagrafDesc>{height}<small>Height</small></ParagrafDesc></DivFlex>
               <DivFlex>{abilities.map((item: any, index: number) => (
                   <ParagrafDesc key={index}>
-                    <span>{firstUpperString(item.ability.name)}</span>
+                    <span>{firstLetterUpper(item.ability.name)}</span>
                   </ParagrafDesc>
                 ))}
                 <small>moves</small>

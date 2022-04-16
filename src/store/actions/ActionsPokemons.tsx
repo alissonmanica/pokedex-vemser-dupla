@@ -1,8 +1,48 @@
 import apiPokedex from "../../apiPokedex"
-
-export async function getInPokemons(dispatch:any) {
+import Notiflix from "notiflix";
+export async function getInPokemons(dispatch:any , generation:string) {
+    let genInGet = ''
+    switch(generation){
+        case 'gen-1':  {
+            genInGet = 'pokemon?offset=0&limit=151'
+            break;
+        }
+        case 'gen-2': {
+            genInGet = 'pokemon?offset=151&limit=251'
+            break;
+        }
+        case 'gen-3': {
+            genInGet = 'pokemon?offset=251&limit=386'
+            break;
+        }
+        case 'gen-4': {
+            genInGet = 'pokemon?offset=386&limit=493'
+            break;
+        }
+        case 'gen-5': {
+            genInGet = 'pokemon?offset=493&limit=649'
+            break;
+        }
+        case 'gen-6': {
+            genInGet = 'pokemon?offset=649&limit=721'
+            break;
+        }
+        case 'gen-7': {
+            genInGet = 'pokemon?offset=721&limit=809'
+            break;
+        }
+        case 'gen-8': {
+            genInGet = 'pokemon?offset=809&limit=905'
+            break;
+        }
+        case 'gen-9': {
+            genInGet = 'pokemon?offset=905&limit=1024'
+            break;
+        }
+    }
+    
     try{
-        const {data} = await apiPokedex.get('pokemon?limit=151&offset=0')
+        const {data} = await apiPokedex.get(`${genInGet}`)
         const setArray = {
             type:'SET_LIST',
             listPokemon:data.results
@@ -14,9 +54,14 @@ export async function getInPokemons(dispatch:any) {
     }
 }
 
-export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:string) {
-   const pokemonsByInput = pokemons.filter((pokemon:any) => 
-        pokemon.name === nomeInput
+export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:string,generation:string) {
+    
+    if (nomeInput === ''){
+        getInPokemons(dispatch ,generation)
+        return
+    }
+    const pokemonsByInput = pokemons.filter((pokemon:any) => 
+        pokemon.name === nomeInput.toLowerCase()
     )
     const setArray = {
         type:'SET_LIST',
@@ -26,8 +71,8 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
         dispatch(setArray)
     }else
     {
-        alert('Nenhum pokemon encontrado')
-        getInPokemons(dispatch)
+        Notiflix.Notify.info('Ops , nenhum pokemon encontrado');
+        getInPokemons(dispatch ,generation)
     }
     
 }
