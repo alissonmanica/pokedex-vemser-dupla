@@ -56,7 +56,7 @@ useEffect(()=>{
       </DivHeader>
         <DivGrid >
         {pokemons.map((pokemon:any , indice:any ) => (
-          <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`) }>
+          <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`)} corFundo="#92C0D8">
               <PdivDoPokemon>{firstLetterUpper(pokemon.name)} <SpanDefault>#{pokemon.url.split('/')[6] <= 99 ? '0' + pokemon.url.split('/')[6] : pokemon.url.split('/')[6] }</SpanDefault> </PdivDoPokemon>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />
          </DivDoPokemon>

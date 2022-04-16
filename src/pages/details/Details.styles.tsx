@@ -4,6 +4,7 @@ export const DetailsContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  background-color: #CE1C15;
 `;
 
 export const ColorTypes = styled.div<{
@@ -85,7 +86,7 @@ export const AboutContainer = styled.div`
   flex-direction: column;
   border-radius: 8px;
   margin: 4px;
-  
+  padding: 20px;
 `;
 
 export const DivFlex = styled.div<{
@@ -105,11 +106,22 @@ export const DivFlex = styled.div<{
   padding: ${props => props.padding};
 `;
 
-export const SpanType = styled.span`
-  color: white;
+export const SpanDesc = styled.span<{
+  color?: string,
+  size?: string,
+}>`
+  color: ${props => props.color};
+  font-size: ${props => props.size};
+  font-weight: bold;
 `;
 
-export const TitlesDesc = styled.h3`
+export const ParagrafDesc = styled.p<{
+  display?: string,
+  flexdirect?: string,
+  alitems?: string,
+  justcontent?: string,
+  size?: string
+}>`
   color: ${(props: any) => {
     switch(props.color) {
       case 'bug':
@@ -165,16 +177,12 @@ export const TitlesDesc = styled.h3`
 
       case 'water':
         return '#6493EB';
-        
-        
-    }
-    }};
-  text-align: center;
-`;
-
-export const ParagrafDesc = styled.p`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
+      }
+  }};
+  display: ${props => props.display};
+  flex-direction: ${props => props.flexdirect};
+  align-items: ${props => props.alitems};
+  justify-content: ${props => props.justcontent};
+  font-size: ${props => props.size};
+  font-weight: bold;
 `;
