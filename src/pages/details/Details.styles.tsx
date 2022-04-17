@@ -4,8 +4,8 @@ export const DetailsContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  background-color: #CE1C15;
-  min-height: 650px;
+  background-color: #F7F7F7;
+  min-height: 750px;
 `;
 
 export const ColorTypes = styled.div<{
@@ -369,6 +369,6 @@ export const ReturnHome = styled.a`
   
   :hover {
     transform: scale(1.2);
-    color: yellow;
+    color: #fff9a0;
   }
 `;

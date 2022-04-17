@@ -64,19 +64,14 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
         return
     }
     const pokemonsByInput = pokemons.filter((pokemon:any) => 
-        pokemon.name === nomeInput.toLowerCase()
+        pokemon.name.includes(nomeInput.toLowerCase())
     )
     const setArray = {
         type:'SET_LIST',
-        listPokemon:pokemonsByInput
+        listPokemon:pokemonsByInput,
+        
     }
-    if(pokemonsByInput.length !== 0){
         dispatch(setArray)
-    }else
-    {
-        Notiflix.Notify.info('Ops , nenhum pokemon encontrado');
-        getInPokemons(dispatch ,generation)
-    }
     
 }
 export async function newGetPokemon(dispatch:any , idPokemon: string) {

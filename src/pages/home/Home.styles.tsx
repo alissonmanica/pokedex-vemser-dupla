@@ -6,7 +6,7 @@ export const DivMaior = styled.div`
   flex-direction: column;
   justify-content: center;
   padding: 10px 300px;
-  background-color: #CE1C15;
+  background-color: #F7F7F7;
 `
 export const DivHeader = styled.div`
   text-align: center;
@@ -53,8 +53,8 @@ export const SpanDefault = styled.span`
 export const DivDoPokemon = styled.div<{
   corFundo?: any
 }>`
- background-color: ${props => props.corFundo};
- border: 1px solid #ee4040;
+background-color: #F7F7F7;
+ border: 1px solid #E0E0E0;
  border-radius: 10px;
  width: 260px;
  max-height: 150px;
@@ -67,7 +67,7 @@ export const DivDoPokemon = styled.div<{
   box-shadow: inset 0px 0px 13px -1px rgba(0,0,0,0.75);
   
   :hover{
-    background-color: #f1e420;
+    background-color: #fff9a0;
     transition: 1s;
     transform: scale(1.1);
     -webkit-box-shadow: 0px 0px 13px -1px rgba(0,0,0,0.56);

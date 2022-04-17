@@ -28,15 +28,15 @@ const [generation ,setGeneration] = useState('gen-1')
 useEffect(()=>{
   getInPokemons(dispatch , generation) 
 },[generation])
-  if(pokemons.length === 0){
-    return(<Loading />)
-  }
+  // if(pokemons.length === 0){
+  //   return(<Loading />)
+  // }
 
   return (
     <DivMaior>
       <DivHeader>
         <H1><span><img src={pokeBall} alt="pokeball" /></span> Pokedex</H1>
-        <InputDefault type="text" placeholder='Procurar'onChange={(e)=>{setNomeInput(e.target.value)}} onBlur={()=>{getSearchByInput(dispatch ,pokemons , nomeInput ,generation )} }/>
+        <InputDefault type="text" placeholder='Procurar'onChange={(e)=>{setNomeInput(e.target.value)}} onKeyUp={()=>{getSearchByInput(dispatch ,pokemons , nomeInput ,generation )} }/>
         <SelectDefault onChange={(e) => setGeneration(e.target.value)}>
              <Option value="gen-1">1ª Geração</Option>
              <Option value="gen-2">2ª Geração</Option>
@@ -54,7 +54,7 @@ useEffect(()=>{
       </DivHeader>
         <DivGrid >
         {pokemons.map((pokemon:any , indice:any ) => (
-          <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`)} corFundo="#92C0D8">
+          <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`)} >
               <PdivDoPokemon>{firstLetterUpper(pokemon.name)} <SpanDefault>#{pokemon.url.split('/')[6] <= 99 ? '0' + pokemon.url.split('/')[6] : pokemon.url.split('/')[6] }</SpanDefault> </PdivDoPokemon>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />
           </DivDoPokemon>
