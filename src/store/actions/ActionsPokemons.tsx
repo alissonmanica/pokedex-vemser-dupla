@@ -39,6 +39,9 @@ export async function getInPokemons(dispatch:any , generation:string) {
             genInGet = 'pokemon?offset=905&limit=1024'
             break;
         }
+        case 'all': {
+            genInGet = 'pokemon?offset=0&limit=1024'
+        }
     }
     
     try{
@@ -79,7 +82,6 @@ export async function getSearchByInput(dispatch:any ,pokemons:any , nomeInput:st
 export async function newGetPokemon(dispatch:any , idPokemon: string) {
     try{
         const {data} = await apiPokedex.get(`/pokemon/${idPokemon}`)
-        console.log(data)
         const setArrayDetalhes = {
             type: 'SET_POKEMON',
             pokemon: data,
@@ -89,6 +91,17 @@ export async function newGetPokemon(dispatch:any , idPokemon: string) {
     }
     catch(error){
         console.log(error);   
+    }
+    try{
+        const {data} = await apiPokedex.get(`/pokemon-species/${idPokemon}`)
+        const setSpecies = {
+            type: 'SET_TEXT',
+            text: data.flavor_text_entries[10].flavor_text
+        }
+        dispatch(setSpecies)
+    }
+    catch (error){
+        console.log(error)
     }
 }
 

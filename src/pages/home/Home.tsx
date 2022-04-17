@@ -27,10 +27,6 @@ const [generation ,setGeneration] = useState('gen-1')
 
 useEffect(()=>{
   getInPokemons(dispatch , generation) 
-},[])
-
-useEffect(()=>{
-  getInPokemons(dispatch , generation) 
 },[generation])
   if(pokemons.length === 0){
     return(<Loading />)
@@ -51,7 +47,9 @@ useEffect(()=>{
              <Option value="gen-7">7ª Geração</Option>
              <Option value="gen-8">8ª Geração</Option>
              <Option value="gen-9">9ª Geração</Option>
-           </SelectDefault>
+             <Option value="all">Todas as Gerações</Option>
+
+        </SelectDefault>
            
       </DivHeader>
         <DivGrid >
@@ -59,9 +57,9 @@ useEffect(()=>{
           <DivDoPokemon key={indice} onClick={() => navigate(`detail/${pokemon.url.split('/')[6]}`)} corFundo="#92C0D8">
               <PdivDoPokemon>{firstLetterUpper(pokemon.name)} <SpanDefault>#{pokemon.url.split('/')[6] <= 99 ? '0' + pokemon.url.split('/')[6] : pokemon.url.split('/')[6] }</SpanDefault> </PdivDoPokemon>
               <img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`} alt="" />
-         </DivDoPokemon>
+          </DivDoPokemon>
         ))}
-        </DivGrid>
+      </DivGrid>
     </DivMaior>
   )
 }
