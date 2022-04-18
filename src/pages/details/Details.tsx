@@ -1,9 +1,15 @@
-import { useEffect} from "react"
-import { connect } from "react-redux"
-import { useParams } from "react-router-dom"
-import { firstLetterUpper, addVirgula } from "../../Utils"
-import { newGetPokemon } from "../../store/actions/ActionsPokemons"
-import Loading from "../../components/loading/Loading"
+import { useEffect} from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+
+import { firstLetterUpper, addVirgula } from "../../Utils";
+import { newGetPokemon } from "../../store/actions/ActionsPokemons";
+import { FaWeight } from "react-icons/fa";
+import { GiBodyHeight } from "react-icons/gi";
+import { BiArrowBack } from "react-icons/bi";
+
+import Loading from "../../components/loading/Loading";
+import PokeBall from "../../images/Pokeball.png";
 import {
   ImgPoke,
   LiSkill,
@@ -16,14 +22,11 @@ import {
   ParagrafDesc,
   AboutContainer,
   DetailsContainer,
-} from "./Details.styles"
-import PokeBall from "../../components/images/Pokeball.png"
-import { FaWeight } from "react-icons/fa"
-import { GiBodyHeight } from "react-icons/gi"
-import { BiArrowBack } from "react-icons/bi"
+} from "./Details.styles";
+import Error from "../error/Error";
 
 
-function Details({pokemon, text, token, dispatch}: any) {
+function Details({pokemon, text, loading, error, dispatch}: any) {
 const {idPokemon}: any = useParams();
 const {id, abilities, name, weight, height, types, stats} = pokemon;
   useEffect(() => {
@@ -32,8 +35,14 @@ const {id, abilities, name, weight, height, types, stats} = pokemon;
     }
   },[])
 
-  if (token) {
+  console.log(error)
+  
+  if (loading) {
     return (<Loading />)
+  }
+
+  if (error) {
+    return (<Error />)
   }
 
   return (
@@ -60,21 +69,21 @@ const {id, abilities, name, weight, height, types, stats} = pokemon;
             <ParagrafDesc margin="12px" display="flex" justcontent="center" size="18px" color={types[0].type.name} >About</ParagrafDesc>
 
             <DivFlex display="flex" juscont="center">
-              <DivFlex display="flex" flexdir="column" alitems="center" padding="0 26px">
+              <DivFlex display="flex" flexdir="column" alitems="center" juscont="space-between" padding="0 26px">
                 <ParagrafDesc size="12px" display="flex" alitems="center" margin="18px 0 0 0">
                   <SpanDesc margin="0 6px 0 0" color="gray" size="14px"><FaWeight /></SpanDesc>
                   {addVirgula(weight.toString())} kg
                 </ParagrafDesc>
                   <SpanDesc size="10px" margin="10px 0 0 0" color="#666666">Weight</SpanDesc>
               </DivFlex>
-              <DivFlex display="flex" flexdir="column" alitems="center" padding="0 26px" bordleft="2px solid #E0E0E0">
+              <DivFlex display="flex" flexdir="column" alitems="center" juscont="space-between" padding="0 26px" bordleft="2px solid #E0E0E0">
                 <ParagrafDesc size="12px" display="flex" alitems="center" margin="18px 0 0 0">
                 <SpanDesc margin="0 6px 0 0" size="14px"><GiBodyHeight /></SpanDesc>
                   {height < 10 ? '0,' + height : height} m
                 </ParagrafDesc>
                   <SpanDesc size="10px" margin="10px 0 0 0" color="#666666">Height</SpanDesc>
               </DivFlex>
-              <DivFlex display="flex" flexdir="column" alitems="center" padding="0 26px" bordleft="2px solid #E0E0E0">
+              <DivFlex display="flex" flexdir="column" alitems="center" juscont="space-between" padding="0 26px" bordleft="2px solid #E0E0E0">
                 {abilities.map((item: any, index: number) => (
                   <ParagrafDesc margin="0 0 6px 0" size="12px" key={index}>
                     <span>{firstLetterUpper(item.ability.name)}</span>
@@ -131,8 +140,9 @@ const {id, abilities, name, weight, height, types, stats} = pokemon;
 
 const mapStateToProps = (state: any) => ({
   pokemon: state.pokeReducer.pokemon,
-  token: state.pokeReducer.token,
-  text: state.pokeReducer.text
+  loading: state.pokeReducer.loading,
+  text: state.pokeReducer.text,
+  error: state.pokeReducer.error
 })
 
 export default connect(mapStateToProps)(Details)

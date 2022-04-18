@@ -1,5 +1,4 @@
 import apiPokedex from "../../apiPokedex"
-import Notiflix from "notiflix";
 export async function getInPokemons(dispatch:any , generation:string) {
     let genInGet = ''
     switch(generation){
@@ -48,11 +47,17 @@ export async function getInPokemons(dispatch:any , generation:string) {
         const {data} = await apiPokedex.get(`${genInGet}`)
         const setArray = {
             type:'SET_LIST',
-            listPokemon:data.results
+            listPokemon:data.results,
         }
         dispatch(setArray)
     }
     catch(error){
+        const setError = {
+            type: 'SET_ERROR',
+            loading: false,
+            error: true
+        }
+        dispatch(setError)
         console.log(error);   
     }
 }
@@ -80,12 +85,18 @@ export async function newGetPokemon(dispatch:any , idPokemon: string) {
         const setArrayDetalhes = {
             type: 'SET_POKEMON',
             pokemon: data,
-            token: false
+            loading: false,
         }
         dispatch(setArrayDetalhes);
     }
     catch(error){
         console.log(error);   
+        const setError = {
+            type: 'SET_ERROR',
+            loading: false,
+            error: true
+        }
+        dispatch(setError)
     }
     try{
         const {data} = await apiPokedex.get(`/pokemon-species/${idPokemon}`)
@@ -99,21 +110,3 @@ export async function newGetPokemon(dispatch:any , idPokemon: string) {
         console.log(error)
     }
 }
-
-// async function getAllPoke(dispatch: any, id: string, pokemon: any) {
-
-//     try {
-//         const {data} = await apiPokedex.get(`/pokemon-species/${id}`)
-//         const allPoke = {
-//             type: 'SET_ALL',
-//             pokemons: data
-//         }
-//         dispatch(allPoke);
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
-
-// export function executeGetAll() {
-    
-// }

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { connect } from "react-redux"
+
 import { getInPokemons } from "../../store/actions/ActionsPokemons"
 import { getSearchByInput } from "../../store/actions/ActionsPokemons"
-import { connect } from "react-redux"
 import { firstLetterUpper } from "../../Utils"
+
 import Loading from "../../components/loading/Loading"
-import pokeBall from './Pokeball.png'
+import Error from "../error/Error"
+import pokeBall from '../../images/PokeballHome.png'
 import {
 DivMaior,
 H1,
@@ -20,17 +23,19 @@ DivHeader,
 
 } from "./Home.styles"
 
-function Home({pokemons , dispatch}:any) {
+function Home({pokemons, error ,dispatch}:any) {
 const navigate = useNavigate()  
 const [nomeInput ,setNomeInput] = useState('')
 const [generation ,setGeneration] = useState('gen-1')
 
-useEffect(()=>{
-  getInPokemons(dispatch , generation) 
-},[generation])
-  // if(pokemons.length === 0){
-  //   return(<Loading />)
-  // }
+  useEffect(()=>{
+    getInPokemons(dispatch , generation) 
+  },[generation])
+ 
+  
+  if (error) {
+    return (<Error />)
+  }
 
   return (
     <DivMaior>
@@ -64,6 +69,7 @@ useEffect(()=>{
   )
 }
 const mapStateToProps = (state:any) => ({
-  pokemons:state.pokeReducer.listPokemon,
+  pokemons: state.pokeReducer.listPokemon,
+  error: state.pokeReducer.error
 })
 export default connect(mapStateToProps)(Home)
