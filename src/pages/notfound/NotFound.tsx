@@ -1,8 +1,16 @@
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { ButtonReturn, TitleNotFound, ContainerNotFound } from "./NotFound.styles"
 
 function NotFound() {
   const navigate = useNavigate()
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/')
+    }, 2000);
+  },[])
 
   return (
     <ContainerNotFound>

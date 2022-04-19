@@ -4,7 +4,7 @@ const INITIAL_VALUES = {
   pokemon: {},
   text: '',
   loading: true,
-  error: false
+  loadingHome: true,
 }
 
 function pokeReducer(state = INITIAL_VALUES, action: any) {
@@ -12,6 +12,7 @@ function pokeReducer(state = INITIAL_VALUES, action: any) {
     return {
       ...state,
       listPokemon: action.listPokemon,
+      loadingHome: action.loadingHome
     }
   }
   
@@ -19,14 +20,14 @@ function pokeReducer(state = INITIAL_VALUES, action: any) {
     return {
       ...state,
       pokemon: action.pokemon,
-      loading: action.loading,
+      loading: action.loading
     }
   }
 
   if (action.type === 'SET_TEXT') {
     return {
       ...state,
-      text: action.text,
+      text: action.text
     }
   }
 
